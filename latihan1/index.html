@@ -23,28 +23,28 @@
             type="range"
             class="custom-range"
             min="0"
-            max="50"
+            max="200"
             v-model="maximum"
           />
         </div>
         <!-- melakukan for loop -->
-        <div class="row d-flex mb-3 aligen-items-center" v-for="item in produc">
+        <div class="row d-flex mb-3 aligen-items-center" v-for="item in products">
           <!-- perkondisian -->
-          <div v-if="item.jumlah <= Number(maximum)">
+          <div v-if="item.price <= Number(maximum)">
             <div class="col">
               <div class="card">
                 <!-- <img v-bind:src="gambar" v-bind:alt="nama" />  -> cara pertama-->
                 <img
                   class="card-img d-block"
-                  :src="item.gambar"
-                  :alt="item.nama"
+                  :src="item.image"
+                  :alt="item.image_title"
                 />
                 <div class="card-body">
                   <!-- menampilkan atribut dengan Vue js -->
                   <!-- menampilkan gambar di dalam Vue js -->
-                  <h1>{{ item.nama }}</h1>
-                  <h4>{{ item.harga }}</h4>
-                  <p>{{ item.keterangan }}</p>
+                  <h1>{{ item.name }}</h1>
+                  <h4>{{ item.price }}</h4>
+                  <p>{{ item.description }}</p>
                 </div>
               </div>
             </div>
