@@ -15,6 +15,14 @@
   <body>
     <div id="app">
       <div class="container">
+        <!-- nav -->
+        <nav class="navbar navbar-light bg-light">
+          <div class="navbar-text ml-auto">
+            <b>cart:</b>
+            <span class="badge text-bg-info">{{ cart.length }}</span>
+          </div>
+        </nav>
+        <!-- end nav -->
         <div class="form-inline mr-auto">
           <label for="" class="font-weight-bold mr-2">Max</label>
           <!-- input data di dalam vuejs -->
@@ -28,11 +36,19 @@
           />
         </div>
         <!-- melakukan for loop -->
-        <div class="row d-flex mb-3 aligen-items-center" v-for="item in products">
+        <div
+          class="row d-flex mb-3 aligen-items-center"
+          v-for="item in products"
+        >
           <!-- perkondisian -->
           <div v-if="item.price <= Number(maximum)">
             <div class="col">
               <div class="card">
+                <!-- fungsi tambah -->
+                <div class="col-1 m-auto">
+                  <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+                </div>
+                <!-- end fungsi tambah -->
                 <!-- <img v-bind:src="gambar" v-bind:alt="nama" />  -> cara pertama-->
                 <img
                   class="card-img d-block"
@@ -43,7 +59,7 @@
                   <!-- menampilkan atribut dengan Vue js -->
                   <!-- menampilkan gambar di dalam Vue js -->
                   <h1>{{ item.name }}</h1>
-                  <h4>{{ item.price }}</h4>
+                  <h4>Rp{{ item.price }}</h4>
                   <p>{{ item.description }}</p>
                 </div>
               </div>

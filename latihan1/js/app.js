@@ -4,6 +4,7 @@ var app = new Vue({
   data: {
     maximum: 50,
     products: null,
+    cart: [],
   },
   mounted: function () {
     // menggunakan fetch API
@@ -12,5 +13,11 @@ var app = new Vue({
       .then((data) => {
         this.products = data;
       });
+  },
+  // membuat kumpulan fungsi dari dalam methods
+  methods: {
+    addItem: function (product) {
+      this.cart.push(product);
+    },
   },
 });
