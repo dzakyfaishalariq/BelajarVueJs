@@ -11,61 +11,101 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
     <div id="app">
       <div class="container">
         <!-- nav -->
-        <nav class="navbar navbar-light bg-light">
-          <div class="navbar-text ml-auto">
-            <b>cart:</b>
-            <span class="badge text-bg-info">{{ cart.length }}</span>
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="navbar-text ms-auto d-flex">
+            <button
+              class="btn btn-sm btn-outline-success"
+              @click="style.sliderStatus = !style.sliderStatus"
+            >
+              <i class="fas fa-dollar-sign"></i>
+            </button>
+            <div class="dropdown ml-2" v-if="cart.length > 0">
+              <!-- dropdwon -->
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-secondary dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span class="badge text-bg-info">{{ cartQty }}</span>
+                  <i class="fas fa-shopping-cart mx-2"></i>
+                  <!-- {{ cartTotal | currencyFormat }} -->
+                  <price :value="Number(cartTotal)"></price>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <div v-for="(item, index) in cart" :key="index">
+                    <div class="dropdown-item-text text-nowrap text-right">
+                      <span
+                        class="badge badge-pill text-bg-warning align-text-top"
+                      >
+                        {{ item.qty }}
+                      </span>
+                      {{ item.product.name }}
+                      <b
+                        >{{ item.product.price * item.qty | currencyFormat }}</b
+                      >
+                      <!-- @click.stop -> digunakan untuk meberhentikan aksi selanjutnya -->
+                      <a
+                        href="#"
+                        class="badge text-bg-danger"
+                        @click.stop="deleteItem(index)"
+                        >-</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end dropdown -->
+            </div>
           </div>
         </nav>
         <!-- end nav -->
-        <div class="form-inline mr-auto">
-          <label for="" class="font-weight-bold mr-2">Max</label>
-          <!-- input data di dalam vuejs -->
-          <input type="number" class="form-control w-25" v-model="maximum" />
-          <input
-            type="range"
-            class="custom-range"
-            min="0"
-            max="200"
-            v-model="maximum"
-          />
-        </div>
-        <!-- melakukan for loop -->
-        <div
-          class="row d-flex mb-3 aligen-items-center"
-          v-for="item in products"
+        <h1>My Shop</h1>
+        <!-- membuat transisi dengan vitur Vue.js -->
+        <transition
+          name="custom"
+          enter-active-class="animate__animated animate__fadeInDown"
+          leave-active-class="animate__animated animate__slideOutRight"
         >
-          <!-- perkondisian -->
-          <div v-if="item.price <= Number(maximum)">
-            <div class="col">
-              <div class="card">
-                <!-- fungsi tambah -->
-                <div class="col-1 m-auto">
-                  <button class="btn btn-info" v-on:click="addItem(item)">+</button>
-                </div>
-                <!-- end fungsi tambah -->
-                <!-- <img v-bind:src="gambar" v-bind:alt="nama" />  -> cara pertama-->
-                <img
-                  class="card-img d-block"
-                  :src="item.image"
-                  :alt="item.image_title"
+          <div v-if="style.sliderStatus">
+            <div class="card" :class="sliderState">
+              <div class="card-body">
+                <label for="" class="form-label">Max : </label>
+                <input
+                  type="number"
+                  :class="style.label"
+                  :style="{ 'width': style.inputWidth + 'px', 'text-align': 'center' }"
+                  v-model="maximum"
                 />
-                <div class="card-body">
-                  <!-- menampilkan atribut dengan Vue js -->
-                  <!-- menampilkan gambar di dalam Vue js -->
-                  <h1>{{ item.name }}</h1>
-                  <h4>Rp{{ item.price }}</h4>
-                  <p>{{ item.description }}</p>
-                </div>
+                <input
+                  type="range"
+                  :class="['form-range', 'mt-2']"
+                  min="0"
+                  max="200"
+                  v-model="maximum"
+                />
               </div>
             </div>
           </div>
-        </div>
+        </transition>
+        <!-- melakukan for loop -->
+        <!-- lakukan transtition grup -->
+        <product-list :products="products" :maximum="maximum" @add="addItem"></product-list>
       </div>
     </div>
     <script
