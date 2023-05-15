@@ -1,28 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container mt-5">
+    <!-- implementasi CSS boosterp -->
+    <h1>IDShope</h1>
+    <p class="animate__animated animate__fadeInRight">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facere saepe, omnis error
+      voluptatibus dolorem fuga
+      nemo modi recusandae ratione?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod porro sunt quis quae. Sit necessitatibus eligendi vero
+      ratione? Debitis quae neque voluptatibus laudantium ratione possimus, sunt quam fugiat quaerat harum placeat cumque?
+      Perspiciatis ipsum et nemo earum, rerum consequuntur. Hic eum corporis dicta provident accusamus dolore quidem non
+      illum aspernatur, sunt culpa fugit debitis blanditiis soluta cupiditate perspiciatis a nam quaerat, eius itaque
+      velit consequatur praesentium. Praesentium veniam sint, atque beatae illo consequatur maiores odio reiciendis nulla
+      autem saepe iusto perferendis voluptatem dicta molestiae sed eligendi suscipit eos. At voluptatibus id, cupiditate
+      adipisci reprehenderit repellendus dolorum. Fugiat amet ab nihil?
+    </p>
+    <!-- memanggil faShoppingCart kedalam porps font-awesome-icon -->
+    <font-awesome-icon icon="shopping-cart"></font-awesome-icon>
+    <price :value="100"></price>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import Price from './components/Price.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    FontAwesomeIcon,
+    Price
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
