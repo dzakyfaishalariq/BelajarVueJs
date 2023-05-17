@@ -4,6 +4,7 @@
 
 <script>
 export default {
+    name: "price-area",
     props: {
         value: {
             type: Number,
@@ -11,7 +12,7 @@ export default {
         },
         prefix: {
             type: String,
-            default: ''
+            default: 'Rp.'
         },
         precision: {
             type: Number,
